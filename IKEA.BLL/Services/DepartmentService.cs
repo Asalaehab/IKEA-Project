@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace IKEA.BLL.Services
 {
-    public class DepartmentService
+    public class DepartmentService : IDepartmentService
     {
         private readonly IDepartmentRepository _departmentRepository;
 
-       
+
         //DepartmentRepository departmentRepository=new DepartmentRepository(new DAL.Persintance.Data.Contexts.ApplicationDbcontext() what will happen if i am not create DI.
         public DepartmentService(IDepartmentRepository departmentRepository)//1-Injection
         {
@@ -27,11 +27,11 @@ namespace IKEA.BLL.Services
 
             var DepartmentsToReturn = departments.Select(D => new DepartmentDto()
             {
-                DeptId=D.Id,
-                Code=D.Code,
-                Name=D.Name,
-                Description=D.Description,
-                DateOfCreation=DateOnly.FromDateTime(D.CreatedOn)
+                DeptId = D.Id,
+                Code = D.Code,
+                Name = D.Name,
+                Description = D.Description,
+                DateOfCreation = DateOnly.FromDateTime(D.CreatedOn)
             });//this what we called Mapping
 
 
@@ -80,7 +80,7 @@ namespace IKEA.BLL.Services
             //    LastModifiedBy = department.LastModifiedBy
             //};
 
-            return department is null ? null : department.ToDepartmentDetailsDto(); 
+            return department is null ? null : department.ToDepartmentDetailsDto();
         }
 
 
@@ -97,7 +97,7 @@ namespace IKEA.BLL.Services
         //Update
         public int UpdateDepartment(UpdatedDepartmentDto departmentDto)
         {
-           return _departmentRepository.Update(departmentDto.ToEntity());
+            return _departmentRepository.Update(departmentDto.ToEntity());
         }
 
         //Delete Department
@@ -109,7 +109,7 @@ namespace IKEA.BLL.Services
                 return false;
             else
             {
-              int Result= _departmentRepository.Remove(Dept);
+                int Result = _departmentRepository.Remove(Dept);
 
                 if (Result > 0)
                     return true;
