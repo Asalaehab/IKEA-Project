@@ -1,4 +1,5 @@
 using IKEA.DAL.Persintance.Data.Contexts;
+using IKEA.DAL.Persintance.Reposatories;
 using Microsoft.EntityFrameworkCore;
 
 namespace IKEA.PL
@@ -17,7 +18,12 @@ namespace IKEA.PL
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+            ////2-Register for Serices
+            //builder.Services.AddScoped<DepartmentRepository>();
 
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            //So If Any Own Need Reference From IDepartmentRepository you will pass Object From DepartmentReposatory
+            
             #endregion
 
             var app = builder.Build();
