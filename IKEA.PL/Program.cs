@@ -1,3 +1,4 @@
+using IKEA.BLL.Services;
 using IKEA.DAL.Persintance.Data.Contexts;
 using IKEA.DAL.Persintance.Reposatories;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,8 @@ namespace IKEA.PL
 
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             //So If Any Own Need Reference From IDepartmentRepository you will pass Object From DepartmentReposatory
-            
+
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
             #endregion
 
             var app = builder.Build();
