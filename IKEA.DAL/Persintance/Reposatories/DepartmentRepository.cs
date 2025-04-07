@@ -14,8 +14,6 @@ namespace IKEA.DAL.Persintance.Reposatories
         private readonly ApplicationDbcontext _dbcontext = dbcontext;
 
         //CRUD
-
-
         //Get All
         public IEnumerable<Department> GetAll(bool WithTracking = false)
         {
