@@ -45,7 +45,8 @@ namespace IKEA.PL.Controllers
                     int Result = _departmentService.AddDepartment(dto);
                     if (Result > 0)
                     {
-                        return RedirectToAction(nameof(Index));
+                        //return RedirectToAction(nameof(Index));
+                        return View(nameof(Index));//XXXXX
                     }//if it created go to index view
                     else
                     {
@@ -76,6 +77,22 @@ namespace IKEA.PL.Controllers
                 }
             }
                 return View(dto);//return the same view to can check the errors
+        }
+        #endregion
+
+
+
+        #region Department Details
+
+        [HttpGet]
+        public IActionResult Details(int? id)
+        {
+            //if i doesnot have value return bad request
+            if (!id.HasValue) return BadRequest();//400
+            var department=_departmentService.GetDepartmentById(id.Value);
+            if (department is null) return NotFound();//404
+
+            return View(department);
         }
         #endregion
     }
