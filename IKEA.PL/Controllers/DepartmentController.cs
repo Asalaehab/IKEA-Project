@@ -1,5 +1,6 @@
 ﻿using IKEA.BLL.DTO;
 using IKEA.BLL.Services;
+using IKEA.PL.Views.DepartmentViewModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IKEA.PL.Controllers
@@ -93,6 +94,67 @@ namespace IKEA.PL.Controllers
             if (department is null) return NotFound();//404
 
             return View(department);
+        }
+        #endregion
+
+
+        #region Edit Department
+
+        [HttpGet]
+        public IActionResult Edit(int? id)
+        {
+            if (!id.HasValue) return BadRequest();//400
+            var department = _departmentService.GetDepartmentById(id.Value);
+            if (department is null) return NotFound();//404
+            var departmentView = new DepartmentEditViewModel()
+            {
+                Code = department.Code,
+                Name = department.Name,
+                Description = department.Description,
+                DateOfCreation=department.CreatedOn
+
+            };
+            return View(departmentView);
+
+        }
+
+
+        [HttpPost]
+        public IActionResult Edit([FromRoute]int id,DepartmentEditViewModel viewModel)
+        {
+            if (!ModelState.IsValid) { return View(viewModel); }
+            try
+            {
+                var updatedDepartment = new UpdatedDepartmentDto()
+                {
+                    Id = id,
+                    Code = viewModel.Code,
+                    Name = viewModel.Name,
+                    Description = viewModel.Description,
+                    DateOfCreation = viewModel.DateOfCreation
+
+                };
+                int Result = _departmentService.UpdateDepartment(updatedDepartment);
+
+                if (Result > 0)  return RedirectToAction(nameof(Index));
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Department is not Updated");
+                }
+            }
+            catch (Exception ex)
+            {
+                if (Environment.IsDevelopment())
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                   
+                }
+                else//Deploymnet
+                {
+                    _logger.LogError(ex.Message);
+                }
+            }
+            return View(viewModel);
         }
         #endregion
     }
