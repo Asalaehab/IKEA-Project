@@ -1,6 +1,7 @@
 using IKEA.BLL.Services;
 using IKEA.DAL.Persintance.Data.Contexts;
-using IKEA.DAL.Persintance.Reposatories;
+using IKEA.DAL.Persintance.Reposatories.Departments;
+using IKEA.DAL.Persintance.Reposatories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace IKEA.PL

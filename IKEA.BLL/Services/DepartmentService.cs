@@ -1,6 +1,6 @@
 ﻿using IKEA.BLL.DTO;
 using IKEA.BLL.Factories;
-using IKEA.DAL.Persintance.Reposatories;
+using IKEA.DAL.Persintance.Reposatories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
