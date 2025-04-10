@@ -11,67 +11,76 @@ using System.Threading.Tasks;
 
 namespace IKEA.BLL.Services.EmployeeServices
 {
-    public class EmployeeService(EmployeeRepository employeeRepository):IEmployeeService
+    public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployeeService
     {
-        private readonly EmployeeRepository _employeeRepository = employeeRepository;
-        public IEnumerable<EmployeeDto> GetAll()
-        {
+        private readonly IEmployeeRepository _employeeRepository = employeeRepository;
 
-            var Employees= _employeeRepository.GetAll();
-            var EmployeesToBeReturned = Employees.Select(E=>new EmployeeDto()
+
+
+        public IEnumerable<EmployeeDto> GetAll(bool WithTracking)
+        {
+            var Employees = _employeeRepository.GetAll();
+            var EmployeesToReturn = Employees.Select(E => new EmployeeDto()
             {
-                Id= E.Id,
-                Name= E.Name,
-                Age= E.Age,
-                Salary= E.Salary,
-                email=E.email,
-                gender= E.gender,
-                Address=E.Address,
-                IsActive= E.IsActive,
-                EmployeeType= E.EmployeeType
+                Id = E.Id,
+                Name = E.Name,
+                Address = E.Address,
+                Age = E.Age,
+                Salary = E.Salary,
+                email = E.email,
+                IsActive = E.IsActive,
+                PhoneNumber = E.PhoneNumber,
+                EmployeeType = E.EmployeeType.ToString(),
+                gender = E.gender.ToString()
+
             });
-            return EmployeesToBeReturned;
+
+
+            return EmployeesToReturn;
         }
+
 
 
         public EmployeeDetailsDto? GetById(int id)
         {
-           var employee= _employeeRepository.GetById(id);
-           if (employee == null)
-                return null;
-           return employee.ToEmployeeDetailsDto();
-            
+            var employee = _employeeRepository.GetById(id);
+            if (employee == null) return null;
+            return new EmployeeDetailsDto()
+            {
+                Name = employee.Name,
+                Address = employee.Address,
+                Age = employee.Age,
+                Salary = employee.Salary,
+                PhoneNumber = employee.PhoneNumber,
+                email = employee.email,
+                IsActive = employee.IsActive,
+                gender = employee.gender.ToString(),
+                EmployeeType = employee.EmployeeType.ToString(),
+                HiringDate = DateOnly.FromDateTime(employee.HiringDate),
+                CreatedBy = 1,
+                LastModifiedBy = 1,
+
+                
+            };
         }
+
 
         public int Create(CreatedEmployeeDto createdEmployeeDto)
         {
-            var employee = createdEmployeeDto.ToEntity();
-            int Result=_employeeRepository.Add(employee);
-            if (Result > 0)
-                return Result;
-            else return 0;
+            throw new NotImplementedException();
+
         }
 
         public bool Delete(int id)
         {
-            var employee=_employeeRepository.GetById(id);
-            if(employee == null) return false;
-            else
-            {
-                int result=_employeeRepository.Remove(employee);
-                if(result > 0) return true;
-                else return false;
-            }
-           
-        }    
+            throw new NotImplementedException();
+        }
+
+      
 
         public int Update(UpdatedEmployeeDto dto)
         {
-            var employee=dto.ToEntity();
-            int result=_employeeRepository.Update(employee);
-            if(result > 0) return result;
-            else return 0;
-            
+            throw new NotImplementedException();
         }
     }
 }

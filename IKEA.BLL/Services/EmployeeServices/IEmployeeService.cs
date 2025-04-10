@@ -10,7 +10,7 @@ namespace IKEA.BLL.Services.EmployeeServices
 {
     public interface IEmployeeService
     {
-        public IEnumerable<EmployeeDto> GetAll();
+        public IEnumerable<EmployeeDto> GetAll(bool WithTracking);
 
         public EmployeeDetailsDto? GetById(int id);
 

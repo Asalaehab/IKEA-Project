@@ -26,8 +26,13 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
 
         public DateOnly HiringDate { get; set; }
 
-        public Gender gender { get; set; }
+        public string gender { get; set; }=null!;
 
-        public EmployeeType EmployeeType { get; set; }
+        public string EmployeeType { get; set; } = null!;
+
+
+        public int CreatedBy { get; set; }//User Id
+
+        public int LastModifiedBy { get; set; }//User Id
     }
 }
