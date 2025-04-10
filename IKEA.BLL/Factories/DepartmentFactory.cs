@@ -1,5 +1,5 @@
 ﻿using IKEA.BLL.DTO;
-using IKEA.DAL.Models;
+using IKEA.DAL.Models.DepartmentsModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;

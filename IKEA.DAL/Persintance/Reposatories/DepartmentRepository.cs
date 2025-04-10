@@ -1,4 +1,5 @@
-﻿using IKEA.DAL.Persintance.Data.Contexts;
+﻿using IKEA.DAL.Models.DepartmentsModel;
+using IKEA.DAL.Persintance.Data.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace IKEA.DAL.Persintance.Reposatories
         private readonly ApplicationDbcontext _dbcontext = dbcontext;
 
         //CRUD
+
+
         //Get All
         public IEnumerable<Department> GetAll(bool WithTracking = false)
         {

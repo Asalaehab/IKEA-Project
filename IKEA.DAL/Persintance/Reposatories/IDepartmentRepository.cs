@@ -1,4 +1,6 @@
 ﻿
+using IKEA.DAL.Models.DepartmentsModel;
+
 namespace IKEA.DAL.Persintance.Reposatories
 {
     public interface IDepartmentRepository
