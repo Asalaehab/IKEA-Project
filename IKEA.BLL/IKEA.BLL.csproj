@@ -10,4 +10,8 @@
     <ProjectReference Include="..\IKEA.DAL\IKEA.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DTO\EmployeeDTO%27s\" />
+  </ItemGroup>
+
 </Project>

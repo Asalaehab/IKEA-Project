@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKEA.BLL.Services
+namespace IKEA.BLL.Services.Department
 {
     public class DepartmentService : IDepartmentService
     {

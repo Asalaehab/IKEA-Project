@@ -1,4 +1,4 @@
-using IKEA.BLL.Services;
+using IKEA.BLL.Services.Department;
 using IKEA.DAL.Persintance.Data.Contexts;
 using IKEA.DAL.Persintance.Reposatories.Departments;
 using IKEA.DAL.Persintance.Reposatories.Interfaces;
