@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IKEA.DAL.Persintance.Reposatories.Interfaces
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepository:IGenericRepositories<Employee>
     {
     }
 }
