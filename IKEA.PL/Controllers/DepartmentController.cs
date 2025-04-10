@@ -1,5 +1,5 @@
 ﻿using IKEA.BLL.DTO;
-using IKEA.BLL.Services;
+using IKEA.BLL.Services.Department;
 using IKEA.PL.Views.DepartmentViewModel;
 using Microsoft.AspNetCore.Mvc;
 

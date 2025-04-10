@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IKEA.DAL.Models.DepartmentsModel;
+using IKEA.DAL.Models.EmployeeModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -20,5 +22,6 @@ namespace IKEA.DAL.Persintance.Data.Contexts
 
         }
         public DbSet<Department> Departments { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

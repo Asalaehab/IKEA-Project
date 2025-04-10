@@ -1,13 +1,13 @@
 ﻿using IKEA.BLL.DTO;
 using IKEA.BLL.Factories;
-using IKEA.DAL.Persintance.Reposatories;
+using IKEA.DAL.Persintance.Reposatories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IKEA.BLL.Services
+namespace IKEA.BLL.Services.Department
 {
     public class DepartmentService : IDepartmentService
     {
