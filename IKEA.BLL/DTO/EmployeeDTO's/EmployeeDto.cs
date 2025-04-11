@@ -36,7 +36,7 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
 
         public string gender { get; set; } = null!;
 
-        public string EmployeeType { get; set; } = null!;
+        public string EmpType { get; set; } = null!;
 
     }
 }

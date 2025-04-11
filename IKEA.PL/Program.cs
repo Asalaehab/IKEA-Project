@@ -1,3 +1,4 @@
+using IKEA.BLL.Profiles;
 using IKEA.BLL.Services.Department;
 using IKEA.BLL.Services.EmployeeServices;
 using IKEA.DAL.Persintance.Data.Contexts;
@@ -29,6 +30,8 @@ namespace IKEA.PL
             //So If Any Own Need Reference From IDepartmentRepository you will pass Object From DepartmentReposatory
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
+            builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
             #endregion
 
             var app = builder.Build();
