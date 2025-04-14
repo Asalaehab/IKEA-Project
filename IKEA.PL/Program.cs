@@ -30,7 +30,8 @@ namespace IKEA.PL
             //So If Any Own Need Reference From IDepartmentRepository you will pass Object From DepartmentReposatory
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            //builder.Services.AddScoped<IEmployeeService,>
             builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
             #endregion
 

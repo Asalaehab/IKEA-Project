@@ -9,6 +9,7 @@ namespace IKEA.DAL.Models.Shared.enums
     public enum Gender
     {
         Female=1,
-        Male=2
+        Male=2,
+        None=3
     }
 }

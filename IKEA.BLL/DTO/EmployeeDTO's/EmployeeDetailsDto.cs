@@ -10,6 +10,7 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
 {
     public class EmployeeDetailsDto
     {
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
 
         public int Age { get; set; }
@@ -33,6 +34,13 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
 
         public int CreatedBy { get; set; }//User Id
 
+
         public int LastModifiedBy { get; set; }//User Id
+
+
+        public DateOnly CreatedOn { get; set; }
+
+        public DateOnly LastMoifiedOn { get; set; }//User Id
+
     }
 }
