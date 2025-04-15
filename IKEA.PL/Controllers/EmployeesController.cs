@@ -21,6 +21,7 @@ namespace IKEA.PL.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Create(CreatedEmployeeDto employeeDto)
         {
             if (ModelState.IsValid)//Server Side Validation
@@ -61,6 +62,7 @@ namespace IKEA.PL.Controllers
         #region Edit
 
         [HttpGet]
+
         public IActionResult Edit(int? id)
         {
             if (!id.HasValue) return BadRequest();
@@ -88,6 +90,7 @@ namespace IKEA.PL.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Edit([FromRoute]int? id,UpdatedEmployeeDto employeeDto)
         {
             if (!id.HasValue || employeeDto.Id != id) return BadRequest();
@@ -120,6 +123,7 @@ namespace IKEA.PL.Controllers
 
 
         #region Delete Employee
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             if(id == 0) return BadRequest();
