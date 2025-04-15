@@ -11,6 +11,7 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
 {
     public class UpdatedEmployeeDto
     {
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Name Can't Be Null")]
         [MaxLength(50, ErrorMessage = "Max Length Should be 50 Charcter")]

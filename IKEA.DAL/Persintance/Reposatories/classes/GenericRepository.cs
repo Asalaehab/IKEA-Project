@@ -18,7 +18,7 @@ namespace IKEA.DAL.Persintance.Reposatories.classes
         public IEnumerable<T> GetAll(bool WithTracking = false)
         {
             if (WithTracking)
-                return _dbcontext.Set<T>().ToList();
+                return _dbcontext.Set<T>().Where(E=>E.IsDeleted != true).ToList();
             else
                 return _dbcontext.Set<T>().AsNoTracking().ToList();
             //if U Did not want to Track it 

@@ -1,4 +1,5 @@
-﻿using IKEA.BLL.DTO.EmployeeDTO_s;
+﻿using AutoMapper;
+using IKEA.BLL.DTO.EmployeeDTO_s;
 using IKEA.BLL.Factories;
 using IKEA.DAL.Models.EmployeeModels;
 using IKEA.DAL.Persintance.Reposatories.classes;
@@ -9,34 +10,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace IKEA.BLL.Services.EmployeeServices
 {
-    public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployeeService
+    public class EmployeeService(IEmployeeRepository employeeRepository,IMapper _mapper) : IEmployeeService
     {
         private readonly IEmployeeRepository _employeeRepository = employeeRepository;
 
-
+        
 
         public IEnumerable<EmployeeDto> GetAll(bool WithTracking)
         {
             var Employees = _employeeRepository.GetAll();
-            var EmployeesToReturn = Employees.Select(E => new EmployeeDto()
-            {
-                Id = E.Id,
-                Name = E.Name,
-                Address = E.Address,
-                Age = E.Age,
-                Salary = E.Salary,
-                email = E.email,
-                IsActive = E.IsActive,
-                PhoneNumber = E.PhoneNumber,
-                EmployeeType = E.EmployeeType.ToString(),
-                gender = E.gender.ToString()
-
-            });
-
-
-            return EmployeesToReturn;
+            
+            //Src        =>Dest
+            //Employee  => EmployeeDto
+            var employeeDto=_mapper.Map<IEnumerable<Employee>,IEnumerable<EmployeeDto>>(Employees);
+            return employeeDto;
+            
+          
         }
 
 
@@ -44,43 +36,36 @@ namespace IKEA.BLL.Services.EmployeeServices
         public EmployeeDetailsDto? GetById(int id)
         {
             var employee = _employeeRepository.GetById(id);
-            if (employee == null) return null;
-            return new EmployeeDetailsDto()
-            {
-                Name = employee.Name,
-                Address = employee.Address,
-                Age = employee.Age,
-                Salary = employee.Salary,
-                PhoneNumber = employee.PhoneNumber,
-                email = employee.email,
-                IsActive = employee.IsActive,
-                gender = employee.gender.ToString(),
-                EmployeeType = employee.EmployeeType.ToString(),
-                HiringDate = DateOnly.FromDateTime(employee.HiringDate),
-                CreatedBy = 1,
-                LastModifiedBy = 1,
-
-                
-            };
+            if (employee == null) { return null; }
+           return _mapper.Map<Employee,EmployeeDetailsDto>(employee);
         }
 
 
         public int Create(CreatedEmployeeDto createdEmployeeDto)
         {
-            throw new NotImplementedException();
 
+            var emp = _mapper.Map<CreatedEmployeeDto, Employee>(createdEmployeeDto);
+            return _employeeRepository.Add(emp);
         }
 
-        public bool Delete(int id)
-        {
-            throw new NotImplementedException();
-        }
+      
 
       
 
         public int Update(UpdatedEmployeeDto dto)
         {
-            throw new NotImplementedException();
+            return _employeeRepository.Update(_mapper.Map<UpdatedEmployeeDto, Employee>(dto));  
+        }
+
+        public bool Delete(int id)
+        {
+            var employee=_employeeRepository.GetById(id);
+            if (employee == null) { return false; }
+            else
+            {
+                employee.IsDeleted = true;
+                return _employeeRepository.Update(employee) > 0 ? true : false;
+            }
         }
     }
 }
