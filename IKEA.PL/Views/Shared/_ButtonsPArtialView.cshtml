@@ -1,0 +1,12 @@
+﻿@model int
+
+
+<td>
+    @*asp-route-Id="@department.DeptId" to can hold it when you click on its button*@
+    <a class="btn btn-primary mx-4" asp-action="Details" asp-route-Id="@Model"><i class="fas fa-eye"></i>Details</a>
+</td>
+
+<td>
+    <a class="btn btn-success mx-4" asp-action="Edit" asp-route-Id="@Model"><i class="fas fa-edit"></i>Update</a>
+    @* <a class="btn btn-danger mx-4" asp-action="Delete" asp-route-Id="@department.DeptId"><i class="fas fa-trash"></i>Delete</a> *@
+</td>

@@ -36,18 +36,25 @@ namespace IKEA.PL.Controllers
         public IActionResult Create()=>  View();
 
         [HttpPost]
-        public IActionResult Create(CreatedDepartmentDto dto)
+        public IActionResult Create(DepartmentEditViewModel dto)
         {
             if (ModelState.IsValid)//Server Side Validation
             {
                 // add try catch because if there is any error in database model
                 try
                 {
-                    int Result = _departmentService.AddDepartment(dto);
+                    var departmentDto = new CreatedDepartmentDto()
+                    {
+                        Name = dto.Name,
+                        Code = dto.Code,
+                        DateOfCreation = dto.DateOfCreation,
+                        Description = dto.Description
+                    };
+                    int Result = _departmentService.AddDepartment(departmentDto);
                     if (Result > 0)
                     {
                         //return RedirectToAction(nameof(Index));
-                        return View(nameof(Index));//XXXXX
+                        return RedirectToAction(nameof(Index));//XXXXX
                     }//if it created go to index view
                     else
                     {
