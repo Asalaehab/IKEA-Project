@@ -1,4 +1,5 @@
-﻿using IKEA.DAL.Models.Shared.Classes;
+﻿using IKEA.DAL.Models.DepartmentsModel;
+using IKEA.DAL.Models.Shared.Classes;
 using IKEA.DAL.Models.Shared.enums;
 using System;
 using System.Collections.Generic;
@@ -30,5 +31,8 @@ namespace IKEA.DAL.Models.EmployeeModels
 
         public EmployeeType EmployeeType { get; set; }
 
+
+        public int? DepartmentId { get; set; }
+        public Department? Department { get; set; }
     }
 }
