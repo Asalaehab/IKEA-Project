@@ -18,7 +18,8 @@ namespace IKEA.BLL.Profiles
         {
             CreateMap<Employee, EmployeeDto>()
                 .ForMember(dest => dest.gender, Options => Options.MapFrom(src => src.gender))
-                .ForMember(dest => dest.EmpType, Options => Options.MapFrom(src => src.EmployeeType));
+                .ForMember(dest => dest.EmpType, Options => Options.MapFrom(src => src.EmployeeType))
+                .ForMember(dest => dest.Department, Options => Options.MapFrom(src=>src.Department!=null?src.Department.Name : null));
 
 
             CreateMap<Employee, EmployeeDetailsDto>()
@@ -26,7 +27,8 @@ namespace IKEA.BLL.Profiles
             .ForMember(dest => dest.EmployeeType, opt => opt.MapFrom(src => src.EmployeeType.ToString()))
             .ForMember(dest => dest.HiringDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.HiringDate)))
             .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.CreatedOn)))
-            .ForMember(dest => dest.LastMoifiedOn, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.LastMoifiedOn)));
+            .ForMember(dest => dest.LastMoifiedOn, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.LastMoifiedOn)))
+            .ForMember(dest => dest.Department, Options => Options.MapFrom(src => src.Department != null ? src.Department.Name : null));
 
 
             CreateMap<CreatedEmployeeDto, Employee>()

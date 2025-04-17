@@ -17,6 +17,7 @@
                 <th>@Html.DisplayNameFor(e=>e.Name)</th>
                 <th>@Html.DisplayNameFor(e=>e.email)</th>
                 <th>@Html.DisplayNameFor(e=>e.Age)</th>
+                <th>@Html.DisplayNameFor(e=>e.Department)</th>
                 <th>@Html.DisplayNameFor(e=>e.Address)</th>
                 <th>@Html.DisplayNameFor(e=>e.Salary)</th>
                 <th>@Html.DisplayNameFor(e=>e.gender)</th>
@@ -36,6 +37,7 @@
                     <td>@employee.Name</td>
                     <td>@employee.email</td>
                     <td>@employee.Age</td>
+                    <td>@(string.IsNullOrEmpty(@employee.Department)?"No Department":employee.Department)</td>
                     <td>@employee.Address</td>
                     <td>@Html.DisplayFor(E => employee.Salary)</td>
                     <td>@employee.gender</td>

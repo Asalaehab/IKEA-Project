@@ -29,6 +29,7 @@ namespace IKEA.PL
             builder.Services.AddDbContext<ApplicationDbcontext>(options=>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseLazyLoadingProxies();
             });
             ////2-Register for Serices
             //builder.Services.AddScoped<DepartmentRepository>();
