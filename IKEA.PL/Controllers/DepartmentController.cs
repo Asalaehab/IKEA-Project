@@ -53,16 +53,22 @@ namespace IKEA.PL.Controllers
                         Description = dto.Description
                     };
                     int Result = _departmentService.AddDepartment(departmentDto);
+                    string Message;
                     if (Result > 0)
                     {
-                        //return RedirectToAction(nameof(Index));
-                        return RedirectToAction(nameof(Index));//XXXXX
+                        Message = $"Department {departmentDto.Name} Is Created Succesfully";
+                        ////return RedirectToAction(nameof(Index));
+                        //return RedirectToAction(nameof(Index));//XXXXX
                     }//if it created go to index view
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Department Can not be created");
-                        //return View(dto);//will go to create with get
+                        Message = $"Department {departmentDto.Name} Is Not  Created";
+
                     }
+
+                    TempData["Message"]=Message;
+                    return RedirectToAction(nameof(Index));
+
                 }
                 catch(Exception ex)
                 {

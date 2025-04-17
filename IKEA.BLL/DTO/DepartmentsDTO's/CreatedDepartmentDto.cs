@@ -16,7 +16,7 @@ namespace IKEA.BLL.DTO
         [Range(100,int.MaxValue)]
         public string Code { get; set; } = null!;
 
-        public string Description { get; set; } = string.Empty;
+        public string? Description { get; set; } = string.Empty;
 
         public DateOnly DateOfCreation { get; set; }
     }
