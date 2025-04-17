@@ -26,6 +26,8 @@ namespace IKEA.PL.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            //ViewData["Message"] = "Hello from viewData";
+            //ViewBag.Message = "Hello from viewBag";
             var departments = _departmentService.GetAllDepartents();
             return View(departments);
         }
