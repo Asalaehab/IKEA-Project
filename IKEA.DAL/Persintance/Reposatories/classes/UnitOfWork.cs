@@ -11,18 +11,18 @@ namespace IKEA.DAL.Persintance.Reposatories.classes
 
     public class UnitOfWork : IUnitOfWork
     {
-        private IEmployeeRepository _employeeRepository;
+        private Lazy< IEmployeeRepository> _employeeRepository;
         private readonly ApplicationDbcontext _dbcontext;
-        private IDepartmentRepository _departmentRepository;
+        private Lazy<IDepartmentRepository> _departmentRepository;
         public UnitOfWork(IDepartmentRepository departmentRepository,IEmployeeRepository employeeRepository,ApplicationDbcontext dbcontext)
         {
-            _departmentRepository = departmentRepository;
-            _employeeRepository = employeeRepository;
+            _departmentRepository = new Lazy<IDepartmentRepository>();
+            _employeeRepository = new Lazy<IEmployeeRepository>();
             _dbcontext = dbcontext;
         }
-        public IEmployeeRepository EmployeeRepository => _employeeRepository;
+        public IEmployeeRepository EmployeeRepository => _employeeRepository.Value;
 
-        public IDepartmentRepository DepartmentRepository => _departmentRepository;
+        public IDepartmentRepository DepartmentRepository => _departmentRepository.Value;
 
         public int SaveChange()=>  _dbcontext.SaveChanges();
         
