@@ -26,6 +26,8 @@ namespace IKEA.PL.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            //ViewData["Message"] = "Hello from viewData";
+            //ViewBag.Message = "Hello from viewBag";
             var departments = _departmentService.GetAllDepartents();
             return View(departments);
         }
@@ -36,24 +38,37 @@ namespace IKEA.PL.Controllers
         public IActionResult Create()=>  View();
 
         [HttpPost]
-        public IActionResult Create(CreatedDepartmentDto dto)
+        public IActionResult Create(DepartmentEditViewModel dto)
         {
             if (ModelState.IsValid)//Server Side Validation
             {
                 // add try catch because if there is any error in database model
                 try
                 {
-                    int Result = _departmentService.AddDepartment(dto);
+                    var departmentDto = new CreatedDepartmentDto()
+                    {
+                        Name = dto.Name,
+                        Code = dto.Code,
+                        DateOfCreation = dto.DateOfCreation,
+                        Description = dto.Description
+                    };
+                    int Result = _departmentService.AddDepartment(departmentDto);
+                    string Message;
                     if (Result > 0)
                     {
-                        //return RedirectToAction(nameof(Index));
-                        return View(nameof(Index));//XXXXX
+                        Message = $"Department {departmentDto.Name} Is Created Succesfully";
+                        ////return RedirectToAction(nameof(Index));
+                        //return RedirectToAction(nameof(Index));//XXXXX
                     }//if it created go to index view
                     else
                     {
-                        ModelState.AddModelError(string.Empty, "Department Can not be created");
-                        //return View(dto);//will go to create with get
+                        Message = $"Department {departmentDto.Name} Is Not  Created";
+
                     }
+
+                    TempData["Message"]=Message;
+                    return RedirectToAction(nameof(Index));
+
                 }
                 catch(Exception ex)
                 {

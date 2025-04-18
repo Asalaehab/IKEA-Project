@@ -31,12 +31,11 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
 
         [Phone]
         public string PhoneNumber { get; set; } = null!;
-
-
-
         public string gender { get; set; } = null!;
 
         public string EmpType { get; set; } = null!;
 
+
+        public string? Department { get; set; }
     }
 }

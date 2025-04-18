@@ -45,5 +45,9 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
 
         public int LastModifiedBy { get; set; }//User Id
 
+        //public bool IsActive { get; set; }
+
+        public int? DepartmentId { get; set; }
+
     }
 }

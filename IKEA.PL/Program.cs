@@ -5,6 +5,7 @@ using IKEA.DAL.Persintance.Data.Contexts;
 using IKEA.DAL.Persintance.Reposatories.classes;
 //using IKEA.DAL.Persintance.Reposatories.Interfaces;
 using IKEA.DAL.Persintance.Reposatories.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace IKEA.PL
@@ -19,9 +20,16 @@ namespace IKEA.PL
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             //builder.Services.AddScoped<ApplicationDbcontext>();//2.Register To Services in DI container
+            
+            builder.Services.AddControllersWithViews(options=>
+            {
+                options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+            });
+            
             builder.Services.AddDbContext<ApplicationDbcontext>(options=>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+                options.UseLazyLoadingProxies();
             });
             ////2-Register for Serices
             //builder.Services.AddScoped<DepartmentRepository>();
@@ -33,6 +41,7 @@ namespace IKEA.PL
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             //builder.Services.AddScoped<IEmployeeService,>
             builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+            builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             #endregion
 
             var app = builder.Build();

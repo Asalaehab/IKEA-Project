@@ -42,5 +42,7 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
 
         public DateOnly LastMoifiedOn { get; set; }//User Id
 
+        public string? Department { get; set; }
+
     }
 }

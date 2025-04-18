@@ -1,18 +1,9 @@
-﻿using IKEA.DAL.Models.EmployeeModels;
-using IKEA.DAL.Models.Shared.enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace IKEA.BLL.DTO.EmployeeDTO_s
+namespace IKEA.PL.Views.DepartmentViewModel
 {
-    public class UpdatedEmployeeDto
+    public class EmployeeViewModel
     {
-        public int Id { get; set; }
-
         [Required(ErrorMessage = "Name Can't Be Null")]
         [MaxLength(50, ErrorMessage = "Max Length Should be 50 Charcter")]
         [MinLength(5, ErrorMessage = "Min Length shoulld be at least 5")]
@@ -47,6 +38,7 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
 
         public int LastModifiedBy { get; set; }//User Id
 
+        [Display(Name="Department Id")]
         public int? DepartmentId { get; set; }
     }
 }
