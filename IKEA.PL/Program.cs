@@ -41,6 +41,7 @@ namespace IKEA.PL
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             //builder.Services.AddScoped<IEmployeeService,>
             builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
+            builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
             #endregion
 
             var app = builder.Build();

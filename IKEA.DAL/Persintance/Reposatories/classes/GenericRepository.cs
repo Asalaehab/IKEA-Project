@@ -33,29 +33,27 @@ namespace IKEA.DAL.Persintance.Reposatories.classes
         //}
 
         //Update
-        public int Update(T emp)
+        public void Update(T emp)
         {
             _dbcontext.Set<T>().Update(emp);
-            int Result = _dbcontext.SaveChanges();
-            return Result;
+          
         }
 
 
         //Delete
-        public int Remove(T emp)
+        public void Remove(T emp)
         {
             _dbcontext.Set<T>().Remove(emp);
-            return _dbcontext.SaveChanges();
         }
 
 
 
         //Insert
 
-        public int Add(T emp)
+        public void Add(T emp)
         {
             _dbcontext.Set<T>().Add(emp);
-            return _dbcontext.SaveChanges();
+           
         }
 
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> Predict)
