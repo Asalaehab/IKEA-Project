@@ -11,9 +11,9 @@ namespace IKEA.PL.Controllers
     public class EmployeesController(IEmployeeService _employeeService, IWebHostEnvironment _environment,ILogger<EmployeesController>_logger) : Controller
     {
         
-        public IActionResult Index()
+        public IActionResult Index(string? EmployeeSearchName)
         {
-            var Employees = _employeeService.GetAll();
+            var Employees = _employeeService.GetAll(EmployeeSearchName);
             return View(Employees);
         }
 

@@ -19,16 +19,25 @@ namespace IKEA.BLL.Services.EmployeeServices
 
         
 
-        public IEnumerable<EmployeeDto> GetAll(bool WithTracking)
+        public IEnumerable<EmployeeDto> GetAll(string? EmployeeSearchName)
         {
-            var Employees = _employeeRepository.GetAll();
+      
+
+            ////Src        =>Dest
+            ////Employee  => EmployeeDto
             
-            //Src        =>Dest
-            //Employee  => EmployeeDto
-            var employeeDto=_mapper.Map<IEnumerable<Employee>,IEnumerable<EmployeeDto>>(Employees);
+            IEnumerable<Employee> employees;
+            if (string.IsNullOrWhiteSpace(EmployeeSearchName))
+            {
+                employees = _employeeRepository.GetAll();
+            }
+            else
+            {  
+                employees = _employeeRepository.GetAll(E => E.Name.ToLower().Contains(EmployeeSearchName));
+            }
+            var employeeDto = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeDto>>(employees);
             return employeeDto;
-            
-          
+
         }
 
 
@@ -66,6 +75,11 @@ namespace IKEA.BLL.Services.EmployeeServices
                 employee.IsDeleted = true;
                 return _employeeRepository.Update(employee) > 0 ? true : false;
             }
+        }
+
+        public IEnumerable<EmployeeDto> GetAll(bool WithTracking = false)
+        {
+            throw new NotImplementedException();
         }
     }
 }

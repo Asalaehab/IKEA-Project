@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,6 +56,13 @@ namespace IKEA.DAL.Persintance.Reposatories.classes
         {
             _dbcontext.Set<T>().Add(emp);
             return _dbcontext.SaveChanges();
+        }
+
+        public IEnumerable<T> GetAll(Expression<Func<T, bool>> Predict)
+        {
+            return _dbcontext.Set<T>()
+                 .Where(Predict)
+                 .ToList();
         }
     }
 }
