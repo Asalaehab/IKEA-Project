@@ -1,4 +1,5 @@
 using IKEA.BLL.Profiles;
+using IKEA.BLL.Services.AttchementService;
 using IKEA.BLL.Services.Department;
 using IKEA.BLL.Services.EmployeeServices;
 using IKEA.DAL.Persintance.Data.Contexts;
@@ -42,6 +43,7 @@ namespace IKEA.PL
             //builder.Services.AddScoped<IEmployeeService,>
             builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+            builder.Services.AddTransient<IAttchementService,AttchementService>();
             #endregion
 
             var app = builder.Build();

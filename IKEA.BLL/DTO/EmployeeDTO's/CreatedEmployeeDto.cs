@@ -1,5 +1,6 @@
 ﻿using IKEA.DAL.Models.EmployeeModels;
 using IKEA.DAL.Models.Shared.enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -48,6 +49,8 @@ namespace IKEA.BLL.DTO.EmployeeDTO_s
         //public bool IsActive { get; set; }
 
         public int? DepartmentId { get; set; }
+
+        public IFormFile? Image { get; set; }
 
     }
 }
