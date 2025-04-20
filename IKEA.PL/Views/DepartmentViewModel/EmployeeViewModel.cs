@@ -40,5 +40,7 @@ namespace IKEA.PL.Views.DepartmentViewModel
 
         [Display(Name="Department Id")]
         public int? DepartmentId { get; set; }
+
+        public IFormFile Image { get; set; }
     }
 }

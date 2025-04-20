@@ -47,6 +47,7 @@ namespace IKEA.PL.Controllers
                     CreatedBy= employeeView.CreatedBy,
                     LastModifiedBy= employeeView.LastModifiedBy,
                     DepartmentId= employeeView.DepartmentId,
+                    Image= employeeView.Image
                 };
                 //try and catch for database validaion
                 try

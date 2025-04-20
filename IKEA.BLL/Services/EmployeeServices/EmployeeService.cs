@@ -52,6 +52,13 @@ namespace IKEA.BLL.Services.EmployeeServices
         {
 
             var emp = _mapper.Map<CreatedEmployeeDto, Employee>(createdEmployeeDto);
+            if (createdEmployeeDto.Image is not null)
+            {
+                emp.ImageName = _attchementService.Upload(createdEmployeeDto.Image, "Images");
+            }
+
+
+
              _unitOfWork.EmployeeRepository.Add(emp);
            return _unitOfWork.SaveChange();
         }
