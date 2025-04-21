@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IKEA.PL.Controllers
 {
-    public class AccountController(UserManager<ApplicationUser> _userManager) : Controller
+    public class AccountController(UserManager<ApplicationUser> _userManager,SignInManager<ApplicationUser> _signInManager) : Controller
     {
         //Register
 
@@ -41,6 +41,40 @@ namespace IKEA.PL.Controllers
             }
         }
         //Login
+        [HttpGet]
+        public IActionResult Login() => View();
+
+
+        [HttpPost]
+        public IActionResult Login(LoginViewModel loginView)
+        {
+            if (!ModelState.IsValid) return View(loginView);
+            var User = _userManager.FindByEmailAsync(loginView.Email).Result;
+            //_userManager
+            if (User is not null)
+            {
+                bool flag = _userManager.CheckPasswordAsync(User, loginView.Password).Result;
+                if (flag)
+                {
+                   var Result= _signInManager.PasswordSignInAsync(User,loginView.Password,loginView.RememberMe,false).Result;
+                    if (Result.IsNotAllowed)
+                    {
+                        ModelState.AddModelError(string.Empty,"your Account Not Allowed ");
+                    }
+                    if (Result.IsLockedOut)
+                        ModelState.AddModelError(string.Empty, "Your Account Is Locked out");
+
+                    if (Result.Succeeded)
+                        return RedirectToAction(nameof(HomeController.Index), "Home");
+                }
+                
+            }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Invalid Login");
+            }
+                return View(loginView);
+        }
 
         //Sign out
     }
