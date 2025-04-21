@@ -28,7 +28,8 @@ namespace IKEA.BLL.Profiles
             .ForMember(dest => dest.HiringDate, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.HiringDate)))
             .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.CreatedOn)))
             .ForMember(dest => dest.LastMoifiedOn, opt => opt.MapFrom(src => DateOnly.FromDateTime(src.LastMoifiedOn)))
-            .ForMember(dest => dest.Department, Options => Options.MapFrom(src => src.Department != null ? src.Department.Name : null));
+            .ForMember(dest => dest.Department, Options => Options.MapFrom(src => src.Department != null ? src.Department.Name : null))
+            .ForMember(dest => dest.Image, options => options.MapFrom(src => src.ImageName));
 
 
             CreateMap<CreatedEmployeeDto, Employee>()
