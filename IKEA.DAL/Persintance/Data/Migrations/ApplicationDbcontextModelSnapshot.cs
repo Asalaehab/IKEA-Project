@@ -65,7 +65,7 @@ namespace IKEA.DAL.Persintance.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments");
+                    b.ToTable("Departments", (string)null);
                 });
 
             modelBuilder.Entity("IKEA.DAL.Models.EmployeeModels.Employee", b =>
@@ -141,7 +141,7 @@ namespace IKEA.DAL.Persintance.Data.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("IKEA.DAL.Models.EmployeeModels.Employee", b =>
