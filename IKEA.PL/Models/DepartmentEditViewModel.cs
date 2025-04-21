@@ -1,4 +1,4 @@
-﻿namespace IKEA.PL.Views.DepartmentViewModel
+﻿namespace IKEA.PL.Models
 
 {
     public class DepartmentEditViewModel

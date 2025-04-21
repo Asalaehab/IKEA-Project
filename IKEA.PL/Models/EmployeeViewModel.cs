@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IKEA.PL.Views.DepartmentViewModel
+namespace IKEA.PL.Models
 {
     public class EmployeeViewModel
     {

@@ -3,7 +3,7 @@ using IKEA.BLL.DTO.EmployeeDTO_s;
 using IKEA.BLL.Services.Department;
 using IKEA.BLL.Services.EmployeeServices;
 using IKEA.DAL.Models.Shared.enums;
-using IKEA.PL.Views.DepartmentViewModel;
+using IKEA.PL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IKEA.PL.Controllers
