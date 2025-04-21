@@ -1,5 +1,6 @@
 ﻿using IKEA.DAL.Models.DepartmentsModel;
 using IKEA.DAL.Models.EmployeeModels;
+using IKEA.DAL.Models.IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using System;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace IKEA.DAL.Persintance.Data.Contexts
 {
     //Primary Constructor
-    public class ApplicationDbcontext(DbContextOptions<ApplicationDbcontext> options) :IdentityDbContext(options)
+    public class ApplicationDbcontext(DbContextOptions<ApplicationDbcontext> options) :IdentityDbContext<ApplicationUser>(options)
     {
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
