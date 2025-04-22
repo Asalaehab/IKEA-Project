@@ -27,7 +27,7 @@ namespace IKEA.PL.Controllers
                     Email = viewModel.Email,
                     
                 };
-               var Result= _userManager.CreateAsync(User).Result;
+               var Result= _userManager.CreateAsync(User, viewModel.Password).Result;
 
             if (Result.Succeeded)
                 return RedirectToAction("Login");
@@ -69,6 +69,7 @@ namespace IKEA.PL.Controllers
                 }
                 
             }
+            //A$@la0
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid Login");
