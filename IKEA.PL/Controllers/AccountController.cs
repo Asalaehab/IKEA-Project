@@ -1,5 +1,7 @@
 ﻿using IKEA.DAL.Models.IdentityModel;
 using IKEA.PL.Models;
+using IKEA.PL.Utilities;
+using IKEA.PL.Views.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +9,7 @@ namespace IKEA.PL.Controllers
 {
     public class AccountController(UserManager<ApplicationUser> _userManager,SignInManager<ApplicationUser> _signInManager) : Controller
     {
-        //Register
-
-
+        //SignUp==Register
 
         #region Register
         [HttpGet]
@@ -101,7 +101,41 @@ namespace IKEA.PL.Controllers
         }
 
 
-        //[HttpPost]
+
+        #endregion
+
+        #region ForgetPassword
+        [HttpGet]
+        public IActionResult ForgetPassword() => View();
+
+        [HttpPost]
+        public IActionResult SendResetPasswordLink(ForgetPasswordViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var User = _userManager.FindByEmailAsync(viewModel.Email).Result;
+
+                if (User is not null)
+                {
+                    var email = new Email()
+                    {
+                        To=viewModel.Email,
+                        subject="Rset Password",
+                        body=""//TODO
+
+                    };
+
+                    //Send Email
+
+                }
+
+            }
+            ModelState.AddModelError(string.Empty, "Invalid User");
+             return View(nameof(ForgetPassword), viewModel); 
+            //i make this because the name of view are different
+
+
+        }
         #endregion
     }
 }
