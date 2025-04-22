@@ -9,6 +9,9 @@ namespace IKEA.PL.Controllers
     {
         //Register
 
+
+
+        #region Register
         [HttpGet]
         public IActionResult Register() => View();
 
@@ -16,31 +19,38 @@ namespace IKEA.PL.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel viewModel)
         {
-            if(!ModelState.IsValid) return View(viewModel);
+            if (!ModelState.IsValid) return View(viewModel);
 
 
-                var User = new ApplicationUser()
-                {
-                    FirstName = viewModel.FirstName,
-                    LastName = viewModel.LastName,
-                    UserName = viewModel.UserName,
-                    Email = viewModel.Email,
-                    
-                };
-               var Result= _userManager.CreateAsync(User, viewModel.Password).Result;
+            var User = new ApplicationUser()
+            {
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
+                UserName = viewModel.UserName,
+                Email = viewModel.Email,
+
+            };
+            var Result = _userManager.CreateAsync(User, viewModel.Password).Result;
 
             if (Result.Succeeded)
                 return RedirectToAction("Login");
             else
             {
-                foreach(var error in Result.Errors)
+                foreach (var error in Result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
                 return View(viewModel);
             }
         }
+
+        #endregion
+
+
         //Login
+
+        #region Login
+
         [HttpGet]
         public IActionResult Login() => View();
 
@@ -56,10 +66,10 @@ namespace IKEA.PL.Controllers
                 bool flag = _userManager.CheckPasswordAsync(User, loginView.Password).Result;
                 if (flag)
                 {
-                   var Result= _signInManager.PasswordSignInAsync(User,loginView.Password,loginView.RememberMe,false).Result;
+                    var Result = _signInManager.PasswordSignInAsync(User, loginView.Password, loginView.RememberMe, false).Result;
                     if (Result.IsNotAllowed)
                     {
-                        ModelState.AddModelError(string.Empty,"your Account Not Allowed ");
+                        ModelState.AddModelError(string.Empty, "your Account Not Allowed ");
                     }
                     if (Result.IsLockedOut)
                         ModelState.AddModelError(string.Empty, "Your Account Is Locked out");
@@ -67,16 +77,31 @@ namespace IKEA.PL.Controllers
                     if (Result.Succeeded)
                         return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
-                
+
             }
             //A$@la0
             else
             {
                 ModelState.AddModelError(string.Empty, "Invalid Login");
             }
-                return View(loginView);
+            return View(loginView);
         }
 
+        #endregion
+
+
+
         //Sign out
+
+        #region Sign Out
+        public async Task<IActionResult> SignOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction(nameof(Login));
+        }
+
+
+        //[HttpPost]
+        #endregion
     }
 }
