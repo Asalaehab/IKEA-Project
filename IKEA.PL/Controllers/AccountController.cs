@@ -117,6 +117,8 @@ namespace IKEA.PL.Controllers
 
                 if (User is not null)
                 {
+                    //
+                    var resetPasswordUrl=
                     var email = new Email()
                     {
                         To=viewModel.Email,
