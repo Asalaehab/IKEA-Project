@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using IKEA.BLL.DTO.EmployeeDTO_s;
 using IKEA.BLL.Factories;
+using IKEA.BLL.Services.AttchementService;
 using IKEA.DAL.Models.EmployeeModels;
 using IKEA.DAL.Persintance.Reposatories.classes;
 using IKEA.DAL.Persintance.Reposatories.Interfaces;
@@ -13,12 +14,9 @@ using System.Threading.Tasks;
 
 namespace IKEA.BLL.Services.EmployeeServices
 {
-    public class EmployeeService(IMapper _mapper,IUnitOfWork _unitOfWork) : IEmployeeService
+    public class EmployeeService(IMapper _mapper,IUnitOfWork _unitOfWork,IAttchementService _attchementService) : IEmployeeService
     {
         //private readonly IEmployeeRepository _employeeRepository = employeeRepository;
-
-        
-
         public IEnumerable<EmployeeDto> GetAll(string? EmployeeSearchName)
         {
       
@@ -54,6 +52,13 @@ namespace IKEA.BLL.Services.EmployeeServices
         {
 
             var emp = _mapper.Map<CreatedEmployeeDto, Employee>(createdEmployeeDto);
+            if (createdEmployeeDto.Image is not null)
+            {
+                emp.ImageName = _attchementService.Upload(createdEmployeeDto.Image, "Images");
+            }
+
+
+
              _unitOfWork.EmployeeRepository.Add(emp);
            return _unitOfWork.SaveChange();
         }

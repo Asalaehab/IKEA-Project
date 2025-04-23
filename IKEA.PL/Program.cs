@@ -1,10 +1,15 @@
+﻿//وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ فَلْيَسْتَجِيبُوا لِي وَلْيُؤْمِنُوا بِي لَعَلَّهُمْ يَرْشُدُونَ
+
 using IKEA.BLL.Profiles;
+using IKEA.BLL.Services.AttchementService;
 using IKEA.BLL.Services.Department;
 using IKEA.BLL.Services.EmployeeServices;
+using IKEA.DAL.Models.IdentityModel;
 using IKEA.DAL.Persintance.Data.Contexts;
 using IKEA.DAL.Persintance.Reposatories.classes;
 //using IKEA.DAL.Persintance.Reposatories.Interfaces;
 using IKEA.DAL.Persintance.Reposatories.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,6 +47,9 @@ namespace IKEA.PL
             //builder.Services.AddScoped<IEmployeeService,>
             builder.Services.AddAutoMapper(typeof(MappingProfile).Assembly);
             builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+            builder.Services.AddTransient<IAttchementService,AttchementService>();
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbcontext>();
             #endregion
 
             var app = builder.Build();
@@ -61,12 +69,12 @@ namespace IKEA.PL
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Account}/{action=Register}/{id?}");
 
             #endregion
             app.Run();

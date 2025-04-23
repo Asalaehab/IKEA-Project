@@ -18,4 +18,9 @@
     <ProjectReference Include="..\IKEA.BLL\IKEA.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\DepartmentViewModel\" />
+    <Folder Include="wwwroot\Files\Images\" />
+  </ItemGroup>
+
 </Project>

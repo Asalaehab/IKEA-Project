@@ -16,9 +16,9 @@ namespace IKEA.DAL.Persintance.Reposatories.classes
         private Lazy<IDepartmentRepository> _departmentRepository;
         public UnitOfWork(IDepartmentRepository departmentRepository,IEmployeeRepository employeeRepository,ApplicationDbcontext dbcontext)
         {
-            _departmentRepository = new Lazy<IDepartmentRepository>();
-            _employeeRepository = new Lazy<IEmployeeRepository>();
             _dbcontext = dbcontext;
+            _departmentRepository = new Lazy<IDepartmentRepository>(()=>new DepartmentRepository(dbcontext));
+            _employeeRepository = new Lazy<IEmployeeRepository>(()=>new EmployeeRepository(dbcontext));
         }
         public IEmployeeRepository EmployeeRepository => _employeeRepository.Value;
 

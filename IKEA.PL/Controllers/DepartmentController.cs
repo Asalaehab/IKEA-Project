@@ -1,6 +1,6 @@
 ﻿using IKEA.BLL.DTO;
 using IKEA.BLL.Services.Department;
-using IKEA.PL.Views.DepartmentViewModel;
+using IKEA.PL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IKEA.PL.Controllers
