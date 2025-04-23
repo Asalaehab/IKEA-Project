@@ -126,7 +126,9 @@ namespace IKEA.PL.Controllers
                     };
 
                     //Send Email
+                    EmailSettings.sendEmail(email);
 
+                    return RedirectToAction("CheckYourInbox");
                 }
 
             }
@@ -136,6 +138,8 @@ namespace IKEA.PL.Controllers
 
 
         }
+       
+        public IActionResult CheckYourInbox()=> View();
         #endregion
     }
 }
