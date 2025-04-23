@@ -117,13 +117,15 @@ namespace IKEA.PL.Controllers
 
                 if (User is not null)
                 {
-                    //
-                    var resetPasswordUrl=
+                    var token = _userManager.GeneratePasswordResetTokenAsync(User).Result;
+
+                    //BaseUrl/Account/ResetPassword?email=aliaatarek@gmail.com
+                    var resetPasswordUrl = Url.Action("ResetPassword", "Account", new {email=viewModel.Email,token},Request.Scheme);
                     var email = new Email()
                     {
-                        To=viewModel.Email,
-                        subject="Rset Password",
-                        body=""//TODO
+                        To = viewModel.Email,
+                        subject = "Rset Password",
+                        body = resetPasswordUrl
 
                     };
 
@@ -140,8 +142,44 @@ namespace IKEA.PL.Controllers
 
 
         }
-       
+        [HttpGet]
         public IActionResult CheckYourInbox()=> View();
+
+        [HttpGet]
+        public IActionResult ResetPassword(string email, string token)
+        {
+            TempData["email"]=email;
+            TempData["token"]=token;
+           return View();
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ResetPasswordViewModel viewModel)
+        {
+            if (!ModelState.IsValid) { return View(viewModel); }
+
+            string email=TempData["email"] as string ?? "";
+            string token=TempData["token"] as string ?? "" ;
+
+            var User=_userManager.FindByEmailAsync(email).Result;
+            if (User != null)
+            {
+               var Result= _userManager.ResetPasswordAsync(User, token, viewModel.Password).Result;
+
+                if (Result.Succeeded) 
+                    return RedirectToAction(nameof(Login));
+                else
+                {
+                    foreach(var error in Result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
+                }
+            }
+
+            return View(nameof(ResetPassword),viewModel);
+        }
+
         #endregion
     }
 }
